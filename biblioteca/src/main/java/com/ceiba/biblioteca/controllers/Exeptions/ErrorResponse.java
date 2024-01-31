@@ -1,4 +1,4 @@
-package com.ceiba.biblioteca.controllers.Responses;
+package com.ceiba.biblioteca.controllers.Exeptions;
 
 public final class ErrorResponse {
 

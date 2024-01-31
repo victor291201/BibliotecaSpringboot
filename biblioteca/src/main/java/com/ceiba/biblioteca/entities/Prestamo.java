@@ -21,6 +21,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//entidad prestamo es una clase que sirve como representacion de la tabla prestamos de la base de datos en un objeto 
+//lo cual nos permite manipular los datos de la tabla con mayor facilidad
+
 @Data
 @Entity
 @Setter

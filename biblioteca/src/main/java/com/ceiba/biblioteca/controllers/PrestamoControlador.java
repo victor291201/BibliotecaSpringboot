@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ceiba.biblioteca.controllers.dto.PrestamoMapper;
+import com.ceiba.biblioteca.controllers.dto.PrestamoRequestPost;
+import com.ceiba.biblioteca.controllers.dto.PrestamoResponseGet;
+import com.ceiba.biblioteca.controllers.dto.PrestamoResponsePost;
 import com.ceiba.biblioteca.entities.Prestamo;
 import com.ceiba.biblioteca.services.PrestamoService;
-import com.ceiba.biblioteca.services.dto.PrestamoMapper;
-import com.ceiba.biblioteca.services.dto.PrestamoRequestPost;
-import com.ceiba.biblioteca.services.dto.PrestamoResponseGet;
-import com.ceiba.biblioteca.services.dto.PrestamoResponsePost;
 
 @RestController
 @RequestMapping("prestamo")

@@ -1,18 +1,11 @@
-package com.ceiba.biblioteca.services.dto;
+package com.ceiba.biblioteca.controllers.dto;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ceiba.biblioteca.entities.Prestamo;
-import com.ceiba.biblioteca.reposotories.PrestamoRepository;
 
 @Component
 public final class PrestamoMapper {
-
-    private static PrestamoRepository prestamoRepository;
 
     public static PrestamoResponsePost toRSP(Prestamo data) {
         PrestamoResponsePost dataDto = new PrestamoResponsePost();

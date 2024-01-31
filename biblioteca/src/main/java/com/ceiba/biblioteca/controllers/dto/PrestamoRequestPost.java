@@ -1,4 +1,4 @@
-package com.ceiba.biblioteca.services.dto;
+package com.ceiba.biblioteca.controllers.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

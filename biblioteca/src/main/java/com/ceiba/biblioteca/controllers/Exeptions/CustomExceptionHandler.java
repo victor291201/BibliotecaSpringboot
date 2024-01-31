@@ -1,4 +1,4 @@
-package com.ceiba.biblioteca.controllers.Responses;
+package com.ceiba.biblioteca.controllers.Exeptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

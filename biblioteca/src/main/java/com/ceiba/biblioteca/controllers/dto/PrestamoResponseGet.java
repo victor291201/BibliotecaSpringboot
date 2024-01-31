@@ -1,4 +1,4 @@
-package com.ceiba.biblioteca.services.dto;
+package com.ceiba.biblioteca.controllers.dto;
 
 import java.time.LocalDate;
 

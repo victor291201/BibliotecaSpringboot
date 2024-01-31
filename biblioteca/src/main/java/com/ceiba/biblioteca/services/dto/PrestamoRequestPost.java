@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PrestamoRequestPost {
     private String isbn;
-    private String identificaciónUsuario;
+    private String identificacionUsuario;
     private int tipoUsuario;
 }

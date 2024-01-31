@@ -26,9 +26,6 @@ public class PrestamoServiceImp implements PrestamoService {
 
     @Override
     public Prestamo crearPrestamo(Prestamo prestamo) {
-        System.out.println("---------------------------------");
-        System.out.println("recibi el dato: " + prestamo.getIsbn());
-        System.out.println("---------------------------------");
         if (prestamo.getTipoUsuario() != 1 && prestamo.getTipoUsuario() != 2 && prestamo.getTipoUsuario() != 3) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Tipo de usuario no permitido en la biblioteca");
@@ -53,9 +50,6 @@ public class PrestamoServiceImp implements PrestamoService {
                 .findFirstByIdentificacionUsuarioAndFechaEntregaIsAfter(
                         prestamoSend.getIdentificacionUsuario(), LocalDate.now())
                 .orElse(null);
-        System.out.println("---------------------------------");
-        System.out.println("el dato error es: " + prestamoInvitado);
-        System.out.println("---------------------------------");
         if ((prestamo.getTipoUsuario() == 3 && prestamoInvitado == null) || prestamo.getTipoUsuario() != 3) {
             LocalDate fecha = LocalDate.now();
             int diasAgregados = 0;
@@ -66,19 +60,16 @@ public class PrestamoServiceImp implements PrestamoService {
                     diasAgregados++;
                 }
             }
-
             prestamoSend.setFechaEntrega(fecha);
 
-            System.out.println("---------------------------------");
-            System.out.println("cree el dato: " + prestamoSend.getIsbn());
-            System.out.println("---------------------------------");
             Prestamo prestamoResponse = prestamoRepository.save(prestamoSend);
             return prestamoResponse;
 
         } else {
+            String mensaje = "El usuario con identificación " + prestamo.getIdentificacionUsuario()
+                    + " ya tiene un libro prestado por lo cual no se le puede realizar otro préstamo";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "El usuario con identificación " + prestamoSend.getIdentificacionUsuario()
-                            + " ya tiene un libro prestado por lo cual no se le puede realizar otro préstamo");
+                    mensaje);
         }
     }
 

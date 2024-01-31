@@ -2,6 +2,8 @@ package com.ceiba.biblioteca.services.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PrestamoResponsePost {
     private Integer id;
-    private String fechaMaximaDevolucion;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fechaMaximaDevolucion;
 }

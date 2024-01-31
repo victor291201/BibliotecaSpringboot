@@ -17,13 +17,7 @@ public final class PrestamoMapper {
     public static PrestamoResponsePost toRSP(Prestamo data) {
         PrestamoResponsePost dataDto = new PrestamoResponsePost();
         dataDto.setId(data.getId());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String fechaFormateada = formatter.format(data.getFechaEntrega());
-
-        System.out.println("Fecha formateada: " + fechaFormateada); // "08/02/2024"
-
-        dataDto.setFechaMaximaDevolucion(fechaFormateada);
+        dataDto.setFechaMaximaDevolucion(data.getFechaEntrega());
         return dataDto;
     }
 
@@ -31,7 +25,7 @@ public final class PrestamoMapper {
         PrestamoResponseGet dataDto = new PrestamoResponseGet();
         dataDto.setId(data.getId());
         dataDto.setIsbn(data.getIsbn());
-        dataDto.setIdentificaciónUsuario(data.getIdentificacionUsuario());
+        dataDto.setIdentificacionUsuario(data.getIdentificacionUsuario());
         dataDto.setTipoUsuario(data.getTipoUsuario());
         dataDto.setFechaMaximaDevolucion(data.getFechaEntrega());
         return dataDto;
@@ -40,11 +34,8 @@ public final class PrestamoMapper {
     public static Prestamo toEntity(PrestamoRequestPost dataDto) {
         Prestamo data = new Prestamo();
         data.setIsbn(dataDto.getIsbn());
-        data.setIdentificacionUsuario(dataDto.getIdentificaciónUsuario());
+        data.setIdentificacionUsuario(dataDto.getIdentificacionUsuario());
         data.setTipoUsuario(dataDto.getTipoUsuario());
-        System.out.println("---------------------------------");
-        System.out.println("converti a entidad" + dataDto.getIsbn());
-        System.out.println("---------------------------------");
         return data;
     }
 }

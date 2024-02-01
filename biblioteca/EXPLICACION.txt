@@ -1,0 +1,27 @@
+en este archivo explicaremos un poco la estructura del proyecto, para este proyecto utilizamos una arquitectura
+de capas, manteniendo el principio de responsabilidad unica y permitiendole a las capas acceder unicamente a 
+las funciones de las capas subyaciente, ademas de mantener lo mas limpio posible el codigo de los controladores
+las carpetas internas del proyecto estan organizadas de la siguiente manera:
+
+*entities (en esta carpeta se alejan las funcionalidades de la capa entidades)
+*repositories (en esta carpeta se alejan las funcionalidades de la capa repositorios)
+*services (en esta carpeta se alejan las funcionalidades de la capa servicios)
+*controllers (en esta carpeta se alejan las funcionalidades de la capa controladores)
+*shared (en esta carpeta se aloja utileria del proyecto, codigo que no afecta la arquitectura, pero simplifica la 
+        escritura del codigo y puede ser accedido desde cualquier capa del modelo, para facilitar la escritura del
+        codigo, especificamente aqui se encuentran las enumeraciones y configuracion de respuestas del proyecto)
+
+en la carpeta test organizamos una estructura similar, para poder construir y realizar tests independientes a cada 
+una delas capas del modelo, debo agregar que por cuestiones de orden, me hubiera gustado organizar la clase
+PrestamoTest.java en el lugar donde pertenece (la carpeta controllers) sin embargo, debido a las restricciones
+me vi obligado a dejarla en el lugar donde estaba ubicada inicialmente.
+
+el codigo de todo el poyecto, se encuentra debidamente comentado y explicado, para facilitar su comprencion, ademas de
+contar con un archivo llamado "Biblioteca.postman_collection.json" el cual contiene una lista de peticiones que
+pueden ser importadas en postman, para facilitar la prueba y comprension del proyecto.
+
+cualquier duda adicional que surja respecto al proyecto, la estare contestando en las siguientes etapas del proceso
+de seleccion.
+
+!!!MUCHAS GRACIAS¡¡¡
+QUEDO ATENTO

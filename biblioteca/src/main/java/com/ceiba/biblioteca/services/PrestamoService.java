@@ -1,11 +1,6 @@
 package com.ceiba.biblioteca.services;
 
-import org.springframework.http.ResponseEntity;
-
 import com.ceiba.biblioteca.entities.Prestamo;
-import com.ceiba.biblioteca.reposotories.PrestamoRepository;
-
-import java.util.Optional;
 
 //PrestamoService, es una intefaz que define las funciones que posteriormente van a ser ejecutadas en 
 //la capa de controladores en el controlador de prestamos

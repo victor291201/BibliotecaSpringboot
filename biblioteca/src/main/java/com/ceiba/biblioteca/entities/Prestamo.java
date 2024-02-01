@@ -7,12 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;

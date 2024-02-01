@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+// PrestamoRequestPost es una clase que configuramos para poder manejar los
+// datos que recibiran las peticiones post en su cuerpo
 public class PrestamoRequestPost {
     private String isbn;
     private String identificacionUsuario;

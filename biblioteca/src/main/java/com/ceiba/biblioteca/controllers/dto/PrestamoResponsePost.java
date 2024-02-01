@@ -13,8 +13,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+// PrestamoResponsePost es una clase que configuramos para poder manejar los
+// datos que nos enviaran las peticiones post en su cuerpo
 public class PrestamoResponsePost {
     private Integer id;
+
+    // parseamos la fecha
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaMaximaDevolucion;
 }

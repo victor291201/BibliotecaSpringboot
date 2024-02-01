@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "29fb05d1-4f62-4dee-bd04-28db6bcda4c0",
+		"name": "Biblioteca",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19571595"
+	},
+	"item": [
+		{
+			"name": "GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/prestamo/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"prestamo",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"isbn\":\"DASD154212\",\r\n        \"identificacionUsuario\":\"154515486\",\r\n        \"tipoUsuario\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/prestamo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"prestamo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

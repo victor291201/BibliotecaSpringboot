@@ -13,11 +13,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+// PrestamoResponseGet es una clase que configuramos para poder manejar los
+// datos que nos enviaran las peticiones get en su cuerpo
 public class PrestamoResponseGet {
     private Integer id;
     private String isbn;
     private String identificacionUsuario;
     private int tipoUsuario;
+
+    // parseamos la fecha
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaMaximaDevolucion;
 }

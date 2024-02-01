@@ -2,22 +2,15 @@ package com.ceiba.biblioteca.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ceiba.biblioteca.entities.Prestamo;
 import com.ceiba.biblioteca.reposotories.PrestamoRepository;
+import com.ceiba.biblioteca.shared.enums.EnumTipoUsuario;
 
-import lombok.NonNull;
-
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-import java.util.Optional;
 
 //PrestamoServiceImp es una clase que implementa los metodos definidos en la clase PrestamoService
 //utilizando las clases Prestamo para manejar el objeto y PrestamoRepository para interactuar con la base de datos
@@ -34,7 +27,9 @@ public class PrestamoServiceImp implements PrestamoService {
     @Override
     public Prestamo crearPrestamo(Prestamo prestamo) {
         // verificamos que el codigo pertenece a un tipo de usuario valido
-        if (prestamo.getTipoUsuario() == 1 || prestamo.getTipoUsuario() == 2 || prestamo.getTipoUsuario() == 3) {
+        if (prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_AFILIADO.valor
+                || prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_EMPLEADO.valor
+                || prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_INVITADO.valor) {
             // creamos un objeto tipo Prestamo y continuamos con la logica de la funcion
             Prestamo prestamoSend = new Prestamo();
 
@@ -47,13 +42,13 @@ public class PrestamoServiceImp implements PrestamoService {
             // asignamos una cantidad de dias de prestamo al usuario dependiendo de su tipo
             // de usuario
             Integer dias = 0;
-            if (prestamo.getTipoUsuario() == 1) {
+            if (prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_AFILIADO.valor) {
                 dias = 10;
             } else {
-                if (prestamo.getTipoUsuario() == 2) {
+                if (prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_EMPLEADO.valor) {
                     dias = 8;
                 } else {
-                    if (prestamo.getTipoUsuario() == 3) {
+                    if (prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_INVITADO.valor) {
                         dias = 7;
                     }
                 }
@@ -70,7 +65,8 @@ public class PrestamoServiceImp implements PrestamoService {
 
             // validamos el tipo de usuario nuevamente, y si el usuario pertenece a un tipo
             // usuario de tipo invitado verificamos que no tenga ningun prestamo registrado
-            if ((prestamo.getTipoUsuario() == 3 && prestamoInvitado == null) || prestamo.getTipoUsuario() != 3) {
+            if ((prestamo.getTipoUsuario() == EnumTipoUsuario.USUARIO_INVITADO.valor && prestamoInvitado == null)
+                    || prestamo.getTipoUsuario() != EnumTipoUsuario.USUARIO_INVITADO.valor) {
                 // creamos un objeto de tipo LocalDate y entero, para poder asignarle al usuario
                 // la fecha en la que caducara el prestamo
                 LocalDate fecha = LocalDate.now();
@@ -110,7 +106,8 @@ public class PrestamoServiceImp implements PrestamoService {
 
             } else {
                 // si el usuario pertenece a un tipo usuario de tipo invitado y tiene un
-                // prestamo registrado enviaremos una excepcion con el siguiente mensaje "El
+                // prestamo registrado enviaremos una excepcion previamente configurara en la
+                // clase ErrorResponse y la clase GlobalResponse400 con el siguiente mensaje "El
                 // usuario con identificación xxxxxx ya tiene un libro prestado por lo cual no
                 // se le puede realizar otro préstamo"
                 String mensaje = "El usuario con identificación " + prestamo.getIdentificacionUsuario()
@@ -120,9 +117,10 @@ public class PrestamoServiceImp implements PrestamoService {
             }
 
         } else {
-            // si el codigo de prestamo Pertenece a un tipo de usuario no valido,
-            // enviaremos una excepcion con el
-            // mensaje "Tipo de usuario no permitido en la biblioteca"
+            // si el codigo de prestamo Pertenece a un tipo de usuario no valido, enviaremos
+            // una excepcion previamente configurada en la clase ErrorResponse y la clase
+            // GlobalResponse400 con el mensaje "Tipo de usuario no permitido en la
+            // biblioteca"
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Tipo de usuario no permitido en la biblioteca");
 
@@ -135,9 +133,19 @@ public class PrestamoServiceImp implements PrestamoService {
         // buscamos en la base de datos un prestamo utilizando la funcion .finById() de
         // la clase PrestamoRepository, lo cual nos retornara un prestamo (o un valor
         // nulo en caso de no existirr dicho prestamo)
-        Prestamo prestamo = prestamoRepository.findById(id).get();
+        Prestamo dataOpt = prestamoRepository.findById(id).orElse(null);
+
+        // realizamos la validacion para enviarle una excepcion al usuario en caso de no
+        // encontrar un usuario con el id proporcionado
+        if (dataOpt == null) {
+            // enviamos al usuario una excepcion previamente configurada en la clase
+            // ErrorResponse y la clase y GlobalResponse404 con el mensaje "No existe un
+            // prestamo asociado a ese identificador"
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "No existe un prestamo asociado al identificador " + id);
+        }
 
         // retornamos el valor obtenido de la peticion
-        return prestamo;
+        return dataOpt;
     }
 }
